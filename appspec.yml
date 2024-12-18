@@ -1,0 +1,15 @@
+version: 0.0
+os: linux
+files:
+  - source: target/app.jar
+    destination: /tmp
+hooks:
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+  BeforeInstall:
+    - location: scripts/prepare_instance.sh
+      timeout: 300
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 300
